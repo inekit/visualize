@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { PlinkoPvP } from '../PlinkoPvP/PlinkoPvP';
-import {
+import type {
   Player,
   Ball,
   BoardState,
@@ -59,7 +59,7 @@ const TEST_BALLS: Ball[] = [
   },
 ];
 
-export const SimplePvPTest: React.FC = () => {
+export default function SimplePvPTest() {
   const [currentState, setCurrentState] = useState<BoardState>('waiting');
   const [players, setPlayers] = useState<Player[]>([]);
   const [balls, setBalls] = useState<Ball[]>([]);
@@ -101,7 +101,6 @@ export const SimplePvPTest: React.FC = () => {
   const startMultiPlayer = () => {
     setCurrentState('multi');
     setPlayers(TEST_PLAYERS);
-
     setBalls([]);
     setTimer(5);
   };
@@ -125,18 +124,43 @@ export const SimplePvPTest: React.FC = () => {
   }, [timer]);
 
   return (
-    <div style={{ padding: '20px', background: '#f0f0f0', minHeight: '100vh' }}>
-      <div style={{ marginBottom: '20px' }}>
-        <h1>PvP Plinko - Простой тест</h1>
+    <div className="max-w-md mx-auto px-4 py-6">
+      <div className="mb-6">
+        <h1 className="text-2xl font-bold mb-2">PvP Plinko - Простой тест</h1>
+        <p className="text-muted-foreground">
+          Тестовая страница для проверки функциональности PlinkoPvP.
+        </p>
+      </div>
 
-        <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
-          <button onClick={startDemo}>Демо</button>
-          <button onClick={startSinglePlayer}>Один игрок</button>{' '}
-          <button onClick={startMultiPlayer}>Мульти (40s)</button>{' '}
-          <button onClick={startRound}>Игра</button>
+      <div className="bg-card border border-border rounded-xl shadow-md p-6 mb-6">
+        <div className="flex flex-wrap gap-2 mb-4">
+          <button
+            onClick={startDemo}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          >
+            Демо
+          </button>
+          <button
+            onClick={startSinglePlayer}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          >
+            Один игрок
+          </button>
+          <button
+            onClick={startMultiPlayer}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          >
+            Мульти (5s)
+          </button>
+          <button
+            onClick={startRound}
+            className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90"
+          >
+            Игра
+          </button>
         </div>
 
-        <div style={{ fontSize: '14px', color: '#666' }}>
+        <div className="text-sm text-muted-foreground">
           <strong>Состояние:</strong> {currentState.toUpperCase()}
           {timer !== undefined && ` | Таймер: ${timer}s`}
           {players.length > 0 && ` | Игроков: ${players.length}`}
@@ -145,10 +169,8 @@ export const SimplePvPTest: React.FC = () => {
       </div>
 
       <div
-        style={{
-          overflow: 'hidden',
-          width: 'fit-content',
-        }}
+        className="overflow-hidden w-fit mx-auto"
+        style={{ width: 600, height: 600 }}
       >
         <PlinkoPvP
           players={players}
@@ -157,9 +179,8 @@ export const SimplePvPTest: React.FC = () => {
           timer={timer}
           animation={DEMO_ANIMATION}
           onBallAnimationComplete={handleBallComplete}
-          dimensions={{ width: 500, height: 500 }}
         />
       </div>
     </div>
   );
-};
+}

@@ -1,5 +1,5 @@
 import { Body } from 'planck-js';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Image as KonvaImage } from 'react-konva';
 import PegSvg from '../images/Peg.png';
 import { BASE_SCALE, PEG_GLOW_INTERVAL } from '../constants';
@@ -15,8 +15,6 @@ export function PulsingPegs({
   radius: number;
   canvasHeight: number;
 }) {
-  const pegImg = new Image();
-  pegImg.src = PegSvg;
   const [pulse, setPulse] = useState(0);
 
   useEffect(() => {
@@ -39,33 +37,37 @@ export function PulsingPegs({
 
     return () => cancelAnimationFrame(animationFrameId);
   }, []);
+  const pegImg = useMemo(() => {
+    const pegImg = new Image();
+    pegImg.src = PegSvg;
+    return pegImg;
+  }, []);
 
-  return (
-    <>
-      {allPegs.current.map((peg, index) => {
-        const rowNumber =
-          Math.floor(((peg.getPosition().y * BASE_SCALE) / canvasHeight) * 10) +
-          3;
-        const isGlowing =
-          glowingPegs !== null &&
-          (rowNumber === glowingPegs ||
-            rowNumber === glowingPegs + 2 ||
-            rowNumber === glowingPegs - 2);
+  const pegs = useMemo(() => {
+    return allPegs.current.map((peg, index) => {
+      const rowNumber =
+        Math.floor(((peg.getPosition().y * BASE_SCALE) / canvasHeight) * 10) +
+        3;
+      const isGlowing =
+        glowingPegs !== null &&
+        (rowNumber === glowingPegs ||
+          rowNumber === glowingPegs + 2 ||
+          rowNumber === glowingPegs - 2);
 
-        const scale = isGlowing ? pulse : 1;
-        return (
-          <KonvaImage
-            key={index}
-            x={peg.getPosition().x * BASE_SCALE}
-            y={peg.getPosition().y * BASE_SCALE}
-            image={pegImg}
-            width={radius * 2}
-            height={radius * 2}
-            scale={{ x: scale, y: scale }}
-            offset={{ x: radius, y: radius }}
-          />
-        );
-      })}
-    </>
-  );
+      const scale = isGlowing ? pulse : 1;
+      return (
+        <KonvaImage
+          key={index}
+          x={peg.getPosition().x * BASE_SCALE}
+          y={peg.getPosition().y * BASE_SCALE}
+          image={pegImg}
+          width={radius * 2}
+          height={radius * 2}
+          scale={{ x: scale, y: scale }}
+          offset={{ x: radius, y: radius }}
+        />
+      );
+    });
+  }, [allPegs.current.length, glowingPegs, radius, canvasHeight, pegImg]);
+  return pegs;
 }

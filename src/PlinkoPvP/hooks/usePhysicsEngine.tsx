@@ -454,10 +454,10 @@ export const usePhysicsEngine = ({
       lastTime += fixedDt * 1000;
 
       stepPhysics(fixedDt);
+
       // Stop if ball reached bottom
       const pos = ball.getPosition();
       ballRef.current?.to({ x: pos.x * 50, y: pos.y * 50, duration: 0 });
-      const h = HEIGHT / 70;
       const toBottom = HEIGHT / SCALE - pos.y;
 
       ballRef.current?.to({

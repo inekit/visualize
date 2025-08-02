@@ -105,21 +105,24 @@ export const usePinko = (props: PlinkoPvPProps) => {
 
     setIsRunning(false);
     setResetKey((prev) => (prev *= -1));
-    if (hasNewBalls && brRef.current !== 'multi') {
-      to = setTimeout(() => {
-        // Вызываем callback
-        onBallAnimationComplete?.(currentBall, 'landed');
 
-        // Переходим к следующему шарику
-        setActiveBallIndex((prev) => prev + 1);
+    if (currentBall) {
+      if (hasNewBalls && brRef.current !== 'multi') {
+        to = setTimeout(() => {
+          // Вызываем callback
+          onBallAnimationComplete?.(currentBall, 'landed');
 
-        setIsRunning(true);
-        setResetKey((prev) => (prev *= -1));
-      }, delay); // Задержка между шариками
-    } else {
-      to = setTimeout(() => {
-        onBallAnimationComplete?.(currentBall, 'landed');
-      }, delay);
+          // Переходим к следующему шарику
+          setActiveBallIndex((prev) => prev + 1);
+
+          setIsRunning(true);
+          setResetKey((prev) => (prev *= -1));
+        }, delay); // Задержка между шариками
+      } else {
+        to = setTimeout(() => {
+          onBallAnimationComplete?.(currentBall, 'landed');
+        }, delay);
+      }
     }
 
     return () => {

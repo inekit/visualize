@@ -34,6 +34,7 @@ export const PlayingSector: React.FC<
       groupRef.current?.y(props.canvasHeight - SECTOR_HEIGHT);
     };
   }, [props.isJumping, props.period, props.canvasHeight]);
+
   return (
     <Group
       ref={groupRef}

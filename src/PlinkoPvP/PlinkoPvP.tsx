@@ -5,7 +5,7 @@ import { usePinko } from './hooks/usePinko';
 import { CenterLabel } from './CenterLabel/CenterLabel';
 import styles from './PinkoPvP.module.scss';
 
-export const PlinkoPvP: React.FC<PlinkoPvPProps> = (props) => {
+export const PlinkoPvP: React.FC<PlinkoPvPProps> = React.memo((props) => {
   // Настройки физики для разных режимов
   const getPhysicsSettings = useCallback(() => {
     switch (props.boardState) {
@@ -121,4 +121,4 @@ export const PlinkoPvP: React.FC<PlinkoPvPProps> = (props) => {
       </div>
     </div>
   );
-};
+});
