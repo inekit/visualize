@@ -77,6 +77,13 @@ export const usePinko = (props: PlinkoPvPProps) => {
   const handleBallComplete = useCallback(() => {
     let to: NodeJS.Timeout;
     const delay = boardState === 'waiting' ? 0 : currentAnimation?.bounce;
+    const hasNewBalls = balls.length && balls.length - 1 > activeBallIndex;
+
+    if (!hasNewBalls) {
+      canStartMulti.current = false;
+    } else {
+      canStartMulti.current = true;
+    }
 
     if (brRef.current !== boardState) {
       setTimeout(() => {
@@ -99,7 +106,6 @@ export const usePinko = (props: PlinkoPvPProps) => {
       return;
     }
 
-    const hasNewBalls = balls.length && balls.length - 1 > activeBallIndex;
     if (hasNewBalls) isTail.current = balls[activeBallIndex + 1];
     else isTail.current = null;
 
@@ -132,6 +138,7 @@ export const usePinko = (props: PlinkoPvPProps) => {
 
   const isTail = useRef<Ball | null>(null);
   const brRef = useRef<BoardState>(null);
+  const canStartMulti = useRef<boolean>(false);
   const lastFirst = useRef<Ball | null>(balls[0]);
 
   useEffect(() => {
@@ -165,7 +172,7 @@ export const usePinko = (props: PlinkoPvPProps) => {
         setIsRunning(true);
       }
       setResetKey((prev) => (prev *= -1));
-    } else if (boardState === 'multi') {
+    } else if (boardState === 'multi' && canStartMulti.current) {
       setIsRunning(true);
     }
   }, [boardState, balls, activeBallIndex]);
