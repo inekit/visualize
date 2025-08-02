@@ -1,6 +1,6 @@
 import React from 'react';
 import { PlinkoPvPStageProps } from './PlinkoPvPAPI';
-import { usePinkoStage } from '../hooks/usePinkoStage';
+import { usePinkoStage } from './hooks/usePinkoStage';
 
 import { Layer, Stage } from 'react-konva';
 import { PulsingPegs } from './Nodes/Pegs';
@@ -26,6 +26,7 @@ export const PlinkoPvPStage: React.FC<PlinkoPvPStageProps> = (props) => {
         />
         {props.playersSectors.map((sector) => (
           <PlayingSector
+            key={sector.player.id}
             {...sector}
             period={props.animation?.bounce ?? 0}
             canvasHeight={props.dimensions.height}

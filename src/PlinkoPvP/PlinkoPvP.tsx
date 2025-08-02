@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { PlayerSector, PlinkoPvPProps } from './PlinkoPvPAPI';
 import { PlinkoPvPStage } from './PlinkoPvPStage';
-import { usePinko } from '../hooks/usePinko';
+import { usePinko } from './hooks/usePinko';
 import { CenterLabel } from '../CenterLabel/CenterLabel';
 import styles from './PinkoPvP.module.scss';
 

@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { PlinkoPvPStageProps } from '../PlinkoPvP/PlinkoPvPAPI';
-import { PEG_GLOW_INTERVAL, ROWS } from '../PlinkoPvP/constants';
+import { PlinkoPvPStageProps } from '../PlinkoPvPAPI';
+import { PEG_GLOW_INTERVAL, ROWS } from '../constants';
 import { Group as Grp } from 'konva/lib/Group';
 
 import { usePhysicsEngine } from './usePhysicsEngine';
-import { PhysicsState, Target } from '../PlinkoPvP/ConstaintsTypes';
+import { PhysicsState, Target } from '../ConstaintsTypes';
 import {
   DEFAULT_PARAMS,
   MAGNET_BOTTOM_OFFSET,
   BALL_RADIUS,
   PEG_RADIUS,
-} from '../PlinkoPvP/constants';
+} from '../constants';
 
 export const usePinkoStage = (props: PlinkoPvPStageProps) => {
   const { initialTargetX, externalIsRunning, currentBall } = props;

@@ -4,10 +4,10 @@ import {
   BoardState,
   PlayerSector,
   PlinkoPvPProps,
-} from '../PlinkoPvP/PlinkoPvPAPI';
+} from '../PlinkoPvPAPI';
 import usePrevious from './usePrevious';
-import { MAX_HEIGHT, MAX_WIDTH } from '../PlinkoPvP/constants';
-import { Dimensions } from '../PlinkoPvP/ConstaintsTypes';
+import { MAX_HEIGHT, MAX_WIDTH } from '../constants';
+import { Dimensions } from '../ConstaintsTypes';
 
 export const usePinko = (props: PlinkoPvPProps) => {
   const { animation, balls, boardState, onBallAnimationComplete, players } =

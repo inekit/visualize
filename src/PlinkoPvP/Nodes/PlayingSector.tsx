@@ -3,7 +3,7 @@ import { PlayerSector } from '../PlinkoPvPAPI';
 import { SECTOR_HEIGHT } from '../constants';
 import { Group, Image as KonvaImage, Rect } from 'react-konva';
 import { Group as Grp } from 'konva/lib/Group';
-import { useImage } from '../../hooks/useImage';
+import { useImage } from '../hooks/useImage';
 import Konva from 'konva';
 
 export const PlayingSector: React.FC<

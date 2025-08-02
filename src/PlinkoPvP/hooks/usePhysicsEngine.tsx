@@ -6,22 +6,17 @@ import React, {
   RefObject,
 } from 'react';
 import * as planck from 'planck-js';
-import {
-  PhysicsState,
-  Target,
-  Dimensions,
-  PhysicsConstants,
-} from '../PlinkoPvP/ConstaintsTypes';
+import { PhysicsState, Target, Dimensions } from '../ConstaintsTypes';
 import {
   PHYSICS_CONSTANTS,
   DEFAULT_PARAMS,
   ROWS,
   COLS,
   MAGNET_BOTTOM_OFFSET,
-} from '../PlinkoPvP/constants';
+} from '../constants';
 import { Group } from 'konva/lib/Group';
-import { BoardState } from '../PlinkoPvP/PlinkoPvPAPI';
-import { BASE_SCALE } from '../PlinkoPvP/constants';
+import { BoardState } from '../PlinkoPvPAPI';
+import { BASE_SCALE } from '../constants';
 
 const { World, Vec2 } = planck;
 

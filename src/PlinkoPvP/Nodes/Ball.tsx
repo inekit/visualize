@@ -1,7 +1,5 @@
-import { Body } from 'planck-js';
-import React from 'react';
 import { Group, Image as KonvaImage } from 'react-konva';
-import { useGiftImage } from '../../hooks/useGiftImage';
+import { useGiftImage } from '../hooks/useGiftImage';
 import BallSvg from '../images/Ball.svg';
 import { forwardRef } from 'react';
 import { Group as Grp } from 'konva/lib/Group';
