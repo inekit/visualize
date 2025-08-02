@@ -59,10 +59,11 @@ export const PlinkoPvP: React.FC<PlinkoPvPProps> = (props) => {
     isRunning,
     isTail,
     activeBallIndex,
+    pinkoRef,
   } = usePinko(props);
 
   return (
-    <div className={styles.plinko}>
+    <div className={styles.plinko} ref={pinkoRef}>
       {boardState !== 'round' && (
         <CenterLabel
           type={

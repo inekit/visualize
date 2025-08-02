@@ -40,7 +40,7 @@ export function PulsingPegs({
 
   return (
     <>
-      {allPegs.current.map((peg) => {
+      {allPegs.current.map((peg, index) => {
         const rowNumber =
           Math.floor(((peg.getPosition().y * BASE_SCALE) / MAX_HEIGHT) * 10) +
           3;
@@ -53,7 +53,7 @@ export function PulsingPegs({
         const scale = isGlowing ? pulse : 1;
         return (
           <KonvaImage
-            key={peg.getPosition().x + '-' + peg.getPosition().y}
+            key={index}
             x={peg.getPosition().x * BASE_SCALE}
             y={peg.getPosition().y * BASE_SCALE}
             image={pegImg}

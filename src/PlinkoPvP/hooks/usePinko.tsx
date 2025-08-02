@@ -10,24 +10,29 @@ import { MAX_HEIGHT, MAX_WIDTH } from '../constants';
 import { Dimensions } from '../ConstaintsTypes';
 
 export const usePinko = (props: PlinkoPvPProps) => {
+  const pinkoRef = useRef<HTMLDivElement | null>(null);
   const { animation, balls, boardState, onBallAnimationComplete, players } =
     props;
 
-  const [dimensions, setDimensions] = useState<Dimensions>(() => {
-    const w = Math.min(window.innerWidth - 32, MAX_WIDTH);
-    const h = Math.min(window.innerHeight - 180, MAX_HEIGHT);
-    return { width: w, height: h };
-  });
+  const [dimensions, setDimensions] = useState<Dimensions>(
+    props.dimensions ?? {
+      width: 0,
+      height: 0,
+    },
+  );
 
   useEffect(() => {
     function onResize() {
-      const w = Math.min(window.innerWidth - 32, MAX_WIDTH);
-      const h = Math.min(window.innerHeight - 180, MAX_HEIGHT);
+      if (props.dimensions) return setDimensions(props.dimensions);
+      const rec = pinkoRef.current?.parentElement?.getBoundingClientRect()!;
+      const w = Math.min(rec.width, MAX_WIDTH);
+      const h = Math.min(rec.height, MAX_HEIGHT);
       setDimensions({ width: w, height: h });
     }
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
+    onResize();
+    document.addEventListener('resize', onResize);
+    return () => document.removeEventListener('resize', onResize);
+  }, [pinkoRef.current, props.dimensions]);
 
   const [currentTargetX, setCurrentTargetX] = useState(dimensions.width / 2);
   const [isRunning, setIsRunning] = useState(false);
@@ -213,5 +218,6 @@ export const usePinko = (props: PlinkoPvPProps) => {
     isTail: isRunning,
     playerSectors,
     activeBallIndex,
+    pinkoRef,
   };
 };

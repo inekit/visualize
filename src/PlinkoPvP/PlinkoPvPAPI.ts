@@ -101,6 +101,8 @@ export interface PlinkoPvPProps {
   readonly animation: AnimationGroups;
   /** Callback-событие, вызываемое по завершении анимации шарика */
   readonly onBallAnimationComplete?: (ball: Ball, status: BallStatus) => void;
+
+  readonly dimensions?: Dimensions;
 }
 
 export interface PlinkoPvPStageProps {
