@@ -24,6 +24,7 @@ export const PlinkoPvPStage: React.FC<PlinkoPvPStageProps> = (props) => {
           ref={ballRef}
           radius={physicsState.ballRadiusLive}
           giftId={currentBall?.giftId}
+          giftUrl={currentBall?.giftUrl}
         />
         {props.playersSectors.map((sector) => (
           <PlayingSector

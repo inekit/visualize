@@ -1,8 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import { useImage } from './useImage';
 
-export function useGiftImage({ giftId }: { giftId?: string }) {
+export function useGiftImage({
+  giftId,
+  giftUrl,
+}: {
+  giftId?: string;
+  giftUrl?: string;
+}) {
   return useImage({
-    link: giftId ? `https://api.changes.tg/original/${giftId}.png` : undefined,
+    link:
+      giftUrl ??
+      (giftId ? `https://api.changes.tg/original/${giftId}.png` : undefined),
   });
 }

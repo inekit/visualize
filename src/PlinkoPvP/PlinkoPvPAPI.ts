@@ -46,6 +46,8 @@ export interface Ball {
   readonly type: BallType;
   /** Опциональный идентификатор подарка (giftId) для генерации модели и фона */
   readonly giftId?: string;
+  /** Опциональная ссылка на изображение подарка (приоритет+) */
+  readonly giftUrl?: string;
   /** ID игрока — получателя шарика, если применимо */
   readonly winnerId?: string;
   /** Текущее состояние анимации шарика */

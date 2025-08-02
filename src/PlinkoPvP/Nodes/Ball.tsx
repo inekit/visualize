@@ -1,21 +1,22 @@
 import { Group, Image as KonvaImage } from 'react-konva';
-import { useGiftImage } from '../hooks/useGiftImage';
 import BallSvg from '../images/Ball.svg';
 import React, { forwardRef } from 'react';
 import { Group as Grp } from 'konva/lib/Group';
+import { useGiftImage } from '../hooks/useGiftImage';
 
 export default React.memo(
   forwardRef<
     Grp,
     {
+      giftUrl: string | undefined;
       giftId: string | undefined;
       radius: number;
     }
-  >(function Ball({ giftId, radius }, ballRef) {
+  >(function Ball({ giftId, radius, giftUrl }, ballRef) {
     const balImg = new Image();
     balImg.src = BallSvg;
 
-    const { img: giftImg } = useGiftImage({ giftId });
+    const { img: giftImg } = useGiftImage({ giftId, giftUrl });
 
     return (
       <Group ref={ballRef} opacity={0}>
@@ -31,9 +32,13 @@ export default React.memo(
         {giftImg && (
           <KonvaImage
             image={giftImg}
-            width={50}
-            height={50}
-            offset={{ x: 25, y: 25 }}
+            width={radius}
+            height={radius}
+            cornerRadius={100}
+            offset={{
+              x: radius / 2,
+              y: radius / 2,
+            }}
           />
         )}
       </Group>
