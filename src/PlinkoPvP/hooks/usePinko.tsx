@@ -5,7 +5,6 @@ import {
   PlayerSector,
   PlinkoPvPProps,
 } from '../PlinkoPvPAPI';
-import usePrevious from './usePrevious';
 import { MAX_HEIGHT, MAX_WIDTH } from '../constants';
 import { Dimensions } from '../ConstaintsTypes';
 

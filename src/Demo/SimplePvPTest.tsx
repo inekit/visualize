@@ -148,7 +148,6 @@ export const SimplePvPTest: React.FC = () => {
         style={{
           overflow: 'hidden',
           width: 'fit-content',
-          height: 400,
         }}
       >
         <PlinkoPvP
@@ -158,7 +157,7 @@ export const SimplePvPTest: React.FC = () => {
           timer={timer}
           animation={DEMO_ANIMATION}
           onBallAnimationComplete={handleBallComplete}
-          dimensions={{ width: 300, height: 300 }}
+          dimensions={{ width: 500, height: 500 }}
         />
       </div>
     </div>

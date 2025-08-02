@@ -2,16 +2,18 @@ import { Body } from 'planck-js';
 import React, { useEffect, useState } from 'react';
 import { Image as KonvaImage } from 'react-konva';
 import PegSvg from '../images/Peg.png';
-import { BASE_SCALE, MAX_HEIGHT, PEG_GLOW_INTERVAL } from '../constants';
+import { BASE_SCALE, PEG_GLOW_INTERVAL } from '../constants';
 
 export function PulsingPegs({
   allPegs,
   glowingPegs,
   radius,
+  canvasHeight,
 }: {
   allPegs: React.RefObject<Body[]>;
   glowingPegs: number | null;
   radius: number;
+  canvasHeight: number;
 }) {
   const pegImg = new Image();
   pegImg.src = PegSvg;
@@ -42,7 +44,7 @@ export function PulsingPegs({
     <>
       {allPegs.current.map((peg, index) => {
         const rowNumber =
-          Math.floor(((peg.getPosition().y * BASE_SCALE) / MAX_HEIGHT) * 10) +
+          Math.floor(((peg.getPosition().y * BASE_SCALE) / canvasHeight) * 10) +
           3;
         const isGlowing =
           glowingPegs !== null &&

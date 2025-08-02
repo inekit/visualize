@@ -18,6 +18,7 @@ export const PlinkoPvPStage: React.FC<PlinkoPvPStageProps> = (props) => {
           allPegs={allPegs}
           glowingPegs={glowingPegs}
           radius={physicsState.pegRadiusLive * 2}
+          canvasHeight={props.dimensions.height}
         />
         <Ball
           ref={ballRef}
